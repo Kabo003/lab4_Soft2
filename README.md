@@ -1,88 +1,31 @@
-# Laboratorio 04: Pruebas Unitarias con Jest en React
+## Historia de Usuario 3
+Como estudiante, quiero personalizar la habitación de mi cuy compañero, para lograr obtener un entorno conforme a mis gustos sin tener que modificar la estructura de la aplicación.
 
-Este laboratorio tiene como objetivo proporcionar una introducción práctica a las pruebas unitarias en aplicaciones React utilizando Jest y React Testing Library.
+- Módulo: Habitacion  
+- Estado: Pendiente  
+- Tamaño: L  
+- Prioridad: 2  
+- Complejidad: Intermedia  
 
-## Aplicación Todo List
 
-La aplicación desarrollada es una lista de tareas (Todo List) con las siguientes funcionalidades:
+## Escenario de Prueba
 
-- Añadir nuevas tareas
-- Marcar tareas como completadas
-- Eliminar tareas
-- Filtrar tareas por estado (todas, activas, completadas)
-- Ver estadísticas de tareas
-- Borrar todas las tareas completadas
+### Happy Paths (Escenarios exitosos)
 
-## Estructura del Proyecto
+1. agrega decoración correctamente
+   - EL usuario decide agregar algún elemento a su habitación
+   - El elemento se encuentra en su inventario y con cantidad de objetos suficientes para agregarse.
+   - Resultado: la habitación del usuario ya se puede visualizar el elmento desplegado y reducido en su cantidad del inventario.
 
-```
-app/
-├── components/
-│   ├── Todo.tsx               # Componente principal que integra todos los demás
-│   ├── TodoForm.tsx           # Formulario para añadir nuevas tareas
-│   ├── TodoItem.tsx           # Componente individual para cada tarea
-│   ├── TodoList.tsx           # Lista de tareas
-│   ├── TodoFilter.tsx         # Filtros para las tareas
-│   ├── TodoStats.tsx          # Estadísticas de tareas
-│   └── __tests__/             # Directorio de pruebas
-│       ├── TodoItem.test.tsx  # Pruebas para TodoItem
-│       ├── TodoForm.test.tsx  # Pruebas para TodoForm
-│       └── TodoList.test.tsx  # Pruebas para TodoList
-├── page.tsx                   # Página principal
-└── layout.tsx                 # Layout de la aplicación
-```
+2. Cambio de color de la habitación
+   - El usuario decide cambiar el color del fondo
+   - La habitación tiene el tipo de fondo pensado disponible y habilitado
+   - Resultado: La habitación cambia su color de fondo.
 
-## Instrucciones del Laboratorio
 
-En este laboratorio, exploraremos cómo escribir pruebas unitarias efectivas siguiendo el patrón **Prepare, Execute and Validate**:
+### Unhappy Paths (Escenarios fallidos o con errores)
 
-1. **Prepare**: Configurar el entorno de prueba y los datos necesarios
-2. **Execute**: Realizar la acción que queremos probar
-3. **Validate**: Verificar que el resultado es el esperado
-
-### Ejercicios
-
-#### Ejercicio 1: Completar prueba de TodoItem
-
-Completa el test para verificar que el componente `TodoItem` muestra correctamente el texto de una tarea con caracteres especiales.
-
-Archivo: `app/components/__tests__/TodoItem.test.tsx`
-
-#### Ejercicio 2: Completar prueba de TodoForm
-
-Completa el test para verificar que el componente `TodoForm` maneja correctamente la entrada de texto con espacios al inicio o final.
-
-Archivo: `app/components/__tests__/TodoForm.test.tsx`
-
-#### Ejercicio 3: Completar prueba de TodoList
-
-Completa el test para verificar que el componente `TodoList` pasa correctamente las funciones onToggle y onDelete a cada TodoItem.
-
-Archivo: `app/components/__tests__/TodoList.test.tsx`
-
-## Casos de Prueba
-
-En las pruebas existentes, podrás encontrar ejemplos de:
-
-- **Happy Path**: Pruebas que verifican el comportamiento correcto cuando todo funciona como se espera
-- **Unhappy Path**: Pruebas que verifican el comportamiento cuando hay situaciones inesperadas o errores
-
-## Ejecución de Pruebas
-
-Para ejecutar las pruebas, utiliza el siguiente comando:
-
-```bash
-npm test
-```
-
-Para ejecutar las pruebas en modo observador (útil durante el desarrollo):
-
-```bash
-npm run test:watch
-```
-
-## Recursos Adicionales
-
-- [Jest Documentation](https://jestjs.io/docs/getting-started)
-- [React Testing Library Documentation](https://testing-library.com/docs/react-testing-library/intro/)
-- [Jest DOM Testing Library](https://github.com/testing-library/jest-dom)
+1. Color u objeto no habilitado en el inventario
+   - El usuario elige un elemento no desbloqueado
+   - La aplicación muestra el mensaje: "No tienes el elemento en tu inventario disponible"
+   - Resultado: No ocurre cambio alguno.
