@@ -1,88 +1,62 @@
-# Laboratorio 04: Pruebas Unitarias con Jest en React
+# Historia de Usuario - Sprint 2
 
-Este laboratorio tiene como objetivo proporcionar una introducción práctica a las pruebas unitarias en aplicaciones React utilizando Jest y React Testing Library.
+## Historia de Usuario
+**Como cliente**, quiero consultar a un **chatbot** sobre **medicamentos o farmacias disponibles**, para lograr obtener **información rápida y precisa** sin tener que **buscar manualmente en la plataforma**.
 
-## Aplicación Todo List
+- **Módulo:** Chatbot  
+- **Estado:** Pendiente  
+- **Tamaño:** XL  
+- **Prioridad:** 2  
+- **Complejidad:** Intermedia  
 
-La aplicación desarrollada es una lista de tareas (Todo List) con las siguientes funcionalidades:
+---
 
-- Añadir nuevas tareas
-- Marcar tareas como completadas
-- Eliminar tareas
-- Filtrar tareas por estado (todas, activas, completadas)
-- Ver estadísticas de tareas
-- Borrar todas las tareas completadas
+## Escenarios de Prueba
 
-## Estructura del Proyecto
+### Happy Paths (Escenarios exitosos)
 
-```
-app/
-├── components/
-│   ├── Todo.tsx               # Componente principal que integra todos los demás
-│   ├── TodoForm.tsx           # Formulario para añadir nuevas tareas
-│   ├── TodoItem.tsx           # Componente individual para cada tarea
-│   ├── TodoList.tsx           # Lista de tareas
-│   ├── TodoFilter.tsx         # Filtros para las tareas
-│   ├── TodoStats.tsx          # Estadísticas de tareas
-│   └── __tests__/             # Directorio de pruebas
-│       ├── TodoItem.test.tsx  # Pruebas para TodoItem
-│       ├── TodoForm.test.tsx  # Pruebas para TodoForm
-│       └── TodoList.test.tsx  # Pruebas para TodoList
-├── page.tsx                   # Página principal
-└── layout.tsx                 # Layout de la aplicación
-```
+1. **Consulta exitosa por nombre de medicamento**
+   - El cliente escribe “¿Tienen paracetamol?”
+   - El chatbot responde con la disponibilidad del medicamento y farmacias donde se encuentra.
+   - Resultado: El cliente recibe la información correctamente.
 
-## Instrucciones del Laboratorio
+2. **Consulta exitosa por nombre de farmacia**
+   - El cliente pregunta: “¿Qué medicamentos hay en Inkafarma?”
+   - El chatbot lista los medicamentos disponibles en esa farmacia.
+   - Resultado: El cliente obtiene una lista útil.
 
-En este laboratorio, exploraremos cómo escribir pruebas unitarias efectivas siguiendo el patrón **Prepare, Execute and Validate**:
+3. **Consulta general sobre disponibilidad**
+   - El cliente escribe: “Necesito un analgésico”
+   - El chatbot sugiere medicamentos relacionados (ej. ibuprofeno, paracetamol) y farmacias donde están disponibles.
+   - Resultado: El usuario recibe opciones relevantes.
 
-1. **Prepare**: Configurar el entorno de prueba y los datos necesarios
-2. **Execute**: Realizar la acción que queremos probar
-3. **Validate**: Verificar que el resultado es el esperado
+4. **Reconocimiento de sinónimos o errores menores**
+   - El cliente pregunta por “paraceta mol”
+   - El chatbot corrige automáticamente y responde como si hubiera escrito “paracetamol”.
+   - Resultado: Mejora de la experiencia del usuario.
 
-### Ejercicios
+---
 
-#### Ejercicio 1: Completar prueba de TodoItem
+### Unhappy Paths (Escenarios fallidos o con errores)
 
-Completa el test para verificar que el componente `TodoItem` muestra correctamente el texto de una tarea con caracteres especiales.
+1. **Entrada no entendida por el chatbot**
+   - El cliente escribe: “¿Me puedes dar algo para el alma?”
+   - El chatbot responde con: “Lo siento, no entendí tu consulta. ¿Podrías reformularla?”
+   - Resultado: El usuario no recibe una respuesta útil.
 
-Archivo: `app/components/__tests__/TodoItem.test.tsx`
+2. **Medicamento no encontrado**
+   - El cliente consulta: “¿Tienen dipirona?”
+   - El chatbot responde: “Actualmente no tenemos información sobre ese medicamento.”
+   - Resultado: Información limitada.
 
-#### Ejercicio 2: Completar prueba de TodoForm
+3. **Farmacia no registrada**
+   - El cliente escribe: “¿Qué hay en Farmacia El Buen Samaritano?”
+   - El chatbot indica que no tiene datos de esa farmacia.
+   - Resultado: El sistema limita la búsqueda solo a farmacias registradas.
 
-Completa el test para verificar que el componente `TodoForm` maneja correctamente la entrada de texto con espacios al inicio o final.
+4. **Falla técnica en el chatbot**
+   - El cliente hace una consulta pero el chatbot está fuera de servicio.
+   - El sistema responde: “Actualmente el chatbot no está disponible. Intente más tarde.”
+   - Resultado: Pérdida temporal de funcionalidad.
 
-Archivo: `app/components/__tests__/TodoForm.test.tsx`
-
-#### Ejercicio 3: Completar prueba de TodoList
-
-Completa el test para verificar que el componente `TodoList` pasa correctamente las funciones onToggle y onDelete a cada TodoItem.
-
-Archivo: `app/components/__tests__/TodoList.test.tsx`
-
-## Casos de Prueba
-
-En las pruebas existentes, podrás encontrar ejemplos de:
-
-- **Happy Path**: Pruebas que verifican el comportamiento correcto cuando todo funciona como se espera
-- **Unhappy Path**: Pruebas que verifican el comportamiento cuando hay situaciones inesperadas o errores
-
-## Ejecución de Pruebas
-
-Para ejecutar las pruebas, utiliza el siguiente comando:
-
-```bash
-npm test
-```
-
-Para ejecutar las pruebas en modo observador (útil durante el desarrollo):
-
-```bash
-npm run test:watch
-```
-
-## Recursos Adicionales
-
-- [Jest Documentation](https://jestjs.io/docs/getting-started)
-- [React Testing Library Documentation](https://testing-library.com/docs/react-testing-library/intro/)
-- [Jest DOM Testing Library](https://github.com/testing-library/jest-dom)
+---

@@ -2,6 +2,13 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import TodoList, { Todo } from "../TodoList";
 
+const mockTodoItem = jest.fn();
+jest.mock('../TodoItem', () => (props: any) => {
+  mockTodoItem(props);
+  return <div data-testid={`todo-item-${props.id}`}></div>;
+});
+
+
 describe("TodoList Component", () => {
   // Happy path tests
   it("renderiza un mensaje cuando no hay tareas", () => {
@@ -57,5 +64,35 @@ describe("TodoList Component", () => {
   it("pasa correctamente las funciones onToggle y onDelete a cada TodoItem", () => {
     // TODO: Implementar el test siguiendo el patrón Prepare, Execute, Validate
     // Pista: Deberás modificar el mock de TodoItem para verificar que recibe las props correctas
+    // Preparar
+    const todos: Todo[] = [
+      { id: 1, text: "Tarea 1", completed: false },
+      { id: 2, text: "Tarea 2", completed: true },
+      { id: 3, text: "Tarea 3", completed: false },
+    ];
+    const mockToggle = jest.fn();
+    const mockDelete = jest.fn();
+    mockTodoItem.mockClear();
+
+    // ejecutar render
+    render(
+      <TodoList
+        todos={todos}
+        onToggleTodo={mockToggle}
+        onDeleteTodo={mockDelete}
+      />
+    );
+
+    // Validar
+    expect(mockTodoItem).toHaveBeenCalledTimes(todos.length);
+    todos.forEach((todo, idx) => {
+      expect(mockTodoItem.mock.calls[idx][0]).toMatchObject({
+        id: todo.id,
+        text: todo.text,
+        completed: todo.completed,
+        onToggle: mockToggle,
+        onDelete: mockDelete,
+      });
+    });
   });
 });
